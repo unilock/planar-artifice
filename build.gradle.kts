@@ -8,7 +8,7 @@ plugins {
     idea
     id("net.minecraftforge.gradle") version "5.1.+"
     id("de.undercouch.download") version "5.0.1"
-    id("wtf.gofancy.fancygradle") version "1.1.1-6"
+    id("wtf.gofancy.fancygradle") version "1.1.+"
 }
 
 evaluationDependsOnChildren()
