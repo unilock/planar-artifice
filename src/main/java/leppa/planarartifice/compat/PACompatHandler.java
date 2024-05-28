@@ -62,7 +62,6 @@ public class PACompatHandler {
 		// aether
 		CLASSES.put("aether_legacy", AetherHandler.class);
 		CLASSES.put("aether_legacy_addon", AetherContinuationHandler.class);
-		CLASSES.put("aeadditions", AetherAdditionsHandler.class);
 		CLASSES.put("lost_aether", AetherLostContentHandler.class);
 		// storage options
 		CLASSES.put("appliedenergistics2", AE2Handler.class);
@@ -72,6 +71,17 @@ public class PACompatHandler {
 		CLASSES.put("twilightforest", TwilightForestHandler.class);
 		CLASSES.put("xercapaint", XercaPaintHandler.class);
 		CLASSES.put("tconstruct", TConstructHandler.class);
+
+		// Aether Additions, clever as it is, uses the mod ID "aeadditions".
+		// Which conflicts with "AE Additions - ExtraCells2 Fork".
+		// So let's try a class instead.
+		if (tryClass("com.virtualesence.aetheradditions.init.ModItems")) {
+			try {
+				CLASSES.put("aeadditions", AetherAdditionsHandler.class);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public static void setup() {
@@ -116,5 +126,14 @@ public class PACompatHandler {
 		}
 
 	}
+
+	private static boolean tryClass(String name) {
+		try {
+			Class.forName(name);
+			return true;
+		} catch (Exception ignored) {
+            return false;
+        }
+    }
 
 }
